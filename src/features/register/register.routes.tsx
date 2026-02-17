@@ -2,7 +2,7 @@ import RegisterPage from "./pages/RegisterPage"
 
 const registerRoutes = [
   {
-    path: '/login',
+    path: '/register',
     element: <RegisterPage/>
   }
 ]
