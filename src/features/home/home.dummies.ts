@@ -2,6 +2,74 @@ import images from "@assets/images";
 import { makeRandomString } from "@shared/helpers/makeRandomString";
 import type { CarouselItem } from "@shared/ui/ui.types";
 
+const continueWatchingList: CarouselItem[] = [
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_1,
+    isNewEpisode: true,
+    rating: 4.5,
+    showTitle: true
+  },
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_2,
+    isTop10: true,
+    rating: 4.3,
+    showTitle: true
+  },
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_3,
+    rating: 3.5,
+    showTitle: true
+  },
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_4,
+    isNewEpisode: true,
+    rating: 3.8,
+    showTitle: true
+  },
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_5,
+    rating: 4.5,
+    showTitle: true
+  },
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_6,
+    rating: 4.7,
+    showTitle: true
+  },
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_7,
+    rating: 3.3
+  },
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_8,
+    rating: 3.8,
+    showTitle: true
+
+  },
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_9,
+    rating: 4.2,
+    showTitle: true
+
+  },
+  {
+    title: `Movie ${makeRandomString(5)}`,
+    thumbnail: images.H_10,
+    rating: 4.4,
+    showTitle: true
+
+  },
+]
+
 const topRatedList: CarouselItem[] = [
   {
     title: `Movie ${makeRandomString(5)}`,
@@ -148,4 +216,4 @@ const newReleaseList: CarouselItem[] = [
   },
 ]
 
-export { topRatedList, trendingList, newReleaseList }
+export { continueWatchingList, topRatedList, trendingList, newReleaseList }

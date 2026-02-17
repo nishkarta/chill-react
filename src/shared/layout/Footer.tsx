@@ -8,7 +8,7 @@ import useWindowSize from "@shared/hooks/useWindowSize"
 export default function Footer() {
 
   return (
-    <footer className="footer bg-header text-light-primary border border-t-outline p-5 md:px-15 md:py:10 lg:px-20 lg:py:15">
+    <footer className="footer bg-header text-light-primary border border-t-outline p-5 md:px-15 md:py:10 lg:px-20 lg:py-15">
       <nav className="footer-navigation flex flex-col lg:grid lg:grid-cols-[1fr_2fr]">
         <div className="flex flex-col footer-brand mb-10 lg:items-start lg:justify-center lg:h-full">
           <img className="h-6 mb-4 self-start " src={images.LOGO_TEXT} alt="" />

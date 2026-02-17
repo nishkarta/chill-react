@@ -3,6 +3,16 @@ import REGISTER_BG from "./images/register-bg.jpg";
 import LOGO_TEXT from "./images/logo-text.png";
 import LOGO from "./images/logo.png";
 import GOOGLE from "./images/google.png";
+import H_1 from "./images/h-1.png";
+import H_2 from "./images/h-2.png";
+import H_3 from "./images/h-3.png";
+import H_4 from "./images/h-4.png";
+import H_5 from "./images/h-5.png";
+import H_6 from "./images/h-6.png";
+import H_7 from "./images/h-7.png";
+import H_8 from "./images/h-8.png";
+import H_9 from "./images/h-9.png";
+import H_10 from "./images/h-10.png";
 import P_1 from "./images/p-1.png";
 import P_2 from "./images/p-2.png";
 import P_3 from "./images/p-3.png";
@@ -31,6 +41,16 @@ export default {
   LOGO_TEXT,
   LOGO,
   GOOGLE,
+  H_1,
+  H_2,
+  H_3,
+  H_4,
+  H_5,
+  H_6,
+  H_7,
+  H_8,
+  H_9,
+  H_10,
   P_1,
   P_2,
   P_3,

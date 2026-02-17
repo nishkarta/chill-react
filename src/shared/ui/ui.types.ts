@@ -32,10 +32,12 @@ interface CarouselItem {
   showTitle?: boolean,
   isNewEpisode?: boolean,
   isTop10?: boolean,
+  rating?:number
 }
 
 interface CarouselProps {
   title?: string,
+  thumbnailType?:string,
   list: CarouselItem[],
   className?:string
 }
