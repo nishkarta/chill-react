@@ -2,9 +2,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { CarouselProps } from "./ui.types";
 import Icon from "./Icon";
 import useWindowSize from "@shared/hooks/useWindowSize";
-import { cn } from "@shared/utils/cn";
 import { HoverCardPortal } from "./HoverCardPortal";
+import { cn } from "@shared/utils/cn";
 import { cx } from "@shared/utils/cx";
+
+
 
 export default function Carousel({ title, list, thumbnailType, className }: CarouselProps) {
   const scrollRef = useRef<HTMLUListElement | null>(null);
