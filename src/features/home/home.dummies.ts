@@ -4,6 +4,7 @@ import type { CarouselItem } from "@shared/ui/ui.types";
 
 const continueWatchingList: CarouselItem[] = [
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_1,
     isNewEpisode: true,
@@ -11,6 +12,7 @@ const continueWatchingList: CarouselItem[] = [
     showTitle: true
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_2,
     isTop10: true,
@@ -18,12 +20,14 @@ const continueWatchingList: CarouselItem[] = [
     showTitle: true
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_3,
     rating: 3.5,
     showTitle: true
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_4,
     isNewEpisode: true,
@@ -31,23 +35,27 @@ const continueWatchingList: CarouselItem[] = [
     showTitle: true
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_5,
     rating: 4.5,
     showTitle: true
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_6,
     rating: 4.7,
     showTitle: true
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_7,
     rating: 3.3
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_8,
     rating: 3.8,
@@ -55,6 +63,7 @@ const continueWatchingList: CarouselItem[] = [
 
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_9,
     rating: 4.2,
@@ -62,6 +71,7 @@ const continueWatchingList: CarouselItem[] = [
 
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.H_10,
     rating: 4.4,
@@ -72,45 +82,55 @@ const continueWatchingList: CarouselItem[] = [
 
 const topRatedList: CarouselItem[] = [
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_1,
     isNewEpisode: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_2,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_3
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_4,
     isNewEpisode: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_5
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_6
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_7
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_8
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_9
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_10
   },
@@ -118,102 +138,68 @@ const topRatedList: CarouselItem[] = [
 
 const trendingList: CarouselItem[] = [
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_11,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_12,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_13,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_14,
     isNewEpisode: true,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_15,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_16,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_17,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_18,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_19,
     isTop10: true,
   },
   {
+    id: "9384098324",
     title: `Movie ${makeRandomString(5)}`,
     thumbnail: images.P_20,
     isTop10: true,
   },
 ]
 
-const newReleaseList: CarouselItem[] = [
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_1,
-    isNewEpisode: true,
-  },
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_2,
-    isTop10: true,
-  },
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_3
-  },
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_4,
-    isNewEpisode: true,
-  },
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_5
-  },
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_6
-  },
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_7
-  },
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_8
-  },
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_9
-  },
-  {
-    title: `Movie ${makeRandomString(5)}`,
-    thumbnail: images.P_10
-  },
-]
+const newReleaseList: CarouselItem[] = JSON.parse(localStorage.getItem("newReleaseList") ?? "[]")
 
 export { continueWatchingList, topRatedList, trendingList, newReleaseList }

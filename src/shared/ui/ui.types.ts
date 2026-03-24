@@ -20,6 +20,17 @@ type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> & {
   positiveOnly?: boolean;
 };
 
+type TextAreaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  label?: string;
+  helperText?: string;
+  error?: string;
+  containerClassName?: string;
+  labelClassName?: string;
+  inputClassName?: string;
+  helperClassName?: string;
+  requiredMark?: boolean;
+};
+
 interface ButtonProps {
   variant?: string,
   size?: string,
@@ -27,9 +38,10 @@ interface ButtonProps {
 }
 
 interface CarouselItem {
-  id?: string,
+  id: string,
   title: string,
   thumbnail: string,
+  description?:string;
   thumbnailFile?: File,
   showTitle?: boolean,
   isNewEpisode?: boolean,
@@ -45,4 +57,4 @@ interface CarouselProps {
   className?: string
 }
 
-export type { AuthCardProps, ButtonProps, InputProps, CarouselItem, CarouselProps };
+export type { AuthCardProps, ButtonProps, InputProps, CarouselItem, CarouselProps, TextAreaProps };

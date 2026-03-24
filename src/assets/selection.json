@@ -4,6 +4,90 @@
     {
       "icon": {
         "paths": [
+          "M725.33 127.996c11.208-11.206 24.509-20.095 39.153-26.16s30.336-9.186 46.182-9.186c15.846 0 31.539 3.122 46.182 9.186s27.945 14.954 39.153 26.16c11.203 11.206 20.091 24.509 26.158 39.151s9.185 30.334 9.185 46.182c0 15.848-3.118 31.541-9.185 46.182s-14.956 27.945-26.158 39.151l-576.002 576.002-234.666 64 64-234.67 575.998-575.998z"
+        ],
+        "attrs": [
+          {
+            "fill": "none",
+            "strokeLinejoin": "round",
+            "strokeLinecap": "round",
+            "strokeMiterlimit": "4",
+            "strokeWidth": 85.333504
+          }
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "colorPermutations": {},
+        "tags": [
+          "pencil"
+        ],
+        "grid": 0
+      },
+      "attrs": [
+        {
+          "fill": "none",
+          "strokeLinejoin": "round",
+          "strokeLinecap": "round",
+          "strokeMiterlimit": "4",
+          "strokeWidth": 85.333504
+        }
+      ],
+      "properties": {
+        "order": 9,
+        "id": 48,
+        "name": "pencil",
+        "prevSize": 32,
+        "code": 59719
+      },
+      "setIdx": 2,
+      "setId": 0,
+      "iconIdx": 48
+    },
+    {
+      "icon": {
+        "paths": [
+          "M98.809 224.557h89.825M188.634 224.557h718.598M188.634 224.557v628.774c0 23.821 9.464 46.667 26.309 63.515 16.845 16.842 39.692 26.306 63.515 26.306h449.12c23.827 0 46.673-9.464 63.52-26.306 16.842-16.847 26.306-39.693 26.306-63.515v-628.774h-628.772zM323.371 224.557v-89.825c0-23.823 9.464-46.67 26.309-63.515s39.692-26.309 63.515-26.309h179.647c23.827 0 46.673 9.464 63.52 26.309 16.842 16.845 26.306 39.692 26.306 63.515v89.825M413.195 449.118v269.476M592.842 449.118v269.476"
+        ],
+        "attrs": [
+          {
+            "fill": "none",
+            "strokeLinejoin": "round",
+            "strokeLinecap": "round",
+            "strokeMiterlimit": "4",
+            "strokeWidth": 89.82474105263158
+          }
+        ],
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "colorPermutations": {},
+        "tags": [
+          "trash"
+        ],
+        "grid": 0
+      },
+      "attrs": [
+        {
+          "fill": "none",
+          "strokeLinejoin": "round",
+          "strokeLinecap": "round",
+          "strokeMiterlimit": "4",
+          "strokeWidth": 89.82474105263158
+        }
+      ],
+      "properties": {
+        "order": 10,
+        "id": 51,
+        "name": "trash",
+        "prevSize": 32,
+        "code": 59722
+      },
+      "setIdx": 2,
+      "setId": 0,
+      "iconIdx": 51
+    },
+    {
+      "icon": {
+        "paths": [
           "M1280 103.131l-877.714 877.716-402.286-402.287 103.131-103.131 299.154 298.42 774.586-773.849 103.129 103.131z"
         ],
         "attrs": [],
