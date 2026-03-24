@@ -31,7 +31,6 @@ export default function AdminPage() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggerRefetch])
 
-
   return (
     <section className="bg-header h-screen flex flex-col">
       <Header />
