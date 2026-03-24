@@ -1,7 +1,7 @@
 import Button from "@shared/ui/Button";
 import FileDropInput from "@shared/ui/FileDropInput";
 import { Input } from "@shared/ui/Input";
-import { TextArea } from "@shared/ui/Textarea";
+import { TextArea } from "@shared/ui/TextAreaInput";
 import type { CarouselItem } from "@shared/ui/ui.types";
 import { cx } from "@shared/utils/cx";
 import { useEffect, useMemo, useState, type SyntheticEvent } from "react";
