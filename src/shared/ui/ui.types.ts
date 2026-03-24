@@ -27,19 +27,22 @@ interface ButtonProps {
 }
 
 interface CarouselItem {
+  id?: string,
   title: string,
   thumbnail: string,
+  thumbnailFile?: File,
   showTitle?: boolean,
   isNewEpisode?: boolean,
   isTop10?: boolean,
-  rating?:number
+  rating?: number | string,
+  trailer?: string,
 }
 
 interface CarouselProps {
   title?: string,
-  thumbnailType?:string,
+  thumbnailType?: string,
   list: CarouselItem[],
-  className?:string
+  className?: string
 }
 
 export type { AuthCardProps, ButtonProps, InputProps, CarouselItem, CarouselProps };

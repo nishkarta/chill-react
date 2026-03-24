@@ -43,12 +43,16 @@ export default function Header() {
               {
                 label: "Daftar Saya"
               },
+              {
+                label: "Admin",
+                onClick: ()=> {}
+              },
             ]
               ?.map((each, i) => (
                 <li key={i} className="nav-item">
-                  <a href="" className="text-[10px] hover:text-white cursor-pointer! md:text-[14px] lg:text-[18px]">
+                  <button onClick={() => each?.onClick ? each?.onClick() : () => { }} className="text-[10px] hover:text-white cursor-pointer! md:text-[14px] lg:text-[18px]">
                     {each?.label}
-                  </a>
+                  </button>
                 </li>
               ))
           }

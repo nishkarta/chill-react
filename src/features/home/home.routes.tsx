@@ -4,7 +4,8 @@ const homeRoutes = [
   {
     path: '/home',
     element: <HomePage/>
-  }
+  },
+  
 ]
 
 export { homeRoutes }
