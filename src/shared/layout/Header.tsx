@@ -45,7 +45,7 @@ export default function Header() {
               },
               {
                 label: "Admin",
-                onClick: ()=> {}
+                onClick: ()=> {navigate("/admin")}
               },
             ]
               ?.map((each, i) => (

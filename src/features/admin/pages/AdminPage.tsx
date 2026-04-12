@@ -1,5 +1,6 @@
 import AddEditMovieModal from "@features/admin/widgets/AddEditMovieModal";
 import Header from "@shared/layout/Header";
+import { deleteNewRelease, getNewReleaseList } from "@shared/services/newRelease.service";
 import Button from "@shared/ui/Button";
 import Icon from "@shared/ui/Icon";
 import { type CarouselItem } from "@shared/ui/ui.types";
@@ -8,27 +9,42 @@ import { useEffect, useState } from "react";
 
 export default function AdminPage() {
   const [showAdd, setShowAdd] = useState(false)
-  const defaultList = JSON.parse(localStorage.getItem("newReleaseList") ?? "[]")
-  const [list, setList] = useState<CarouselItem[]>(defaultList)
+  const [list, setList] = useState<CarouselItem[]>([])
   const [triggerRefetch, setTriggerRefetch] = useState(false)
   const [dataToEdit, setDataToEdit] = useState<CarouselItem>()
 
-  const handleDelete = (id: string) => {
-    setList(prev => prev.filter(obj => obj.id !== id))
-  }
+  const fetchList = async () => {
+    try {
+      const data = await getNewReleaseList();
+      setList(data);
+    } catch (err) {
+      console.error("FETCH ERROR:", err);
+    }
+  };
 
   useEffect(() => {
-    localStorage.setItem("newReleaseList", JSON.stringify(list))
+    fetchList()
+  }, [])
 
-  }, [list])
+  const handleDelete = async (id: string) => {
+    try {
+      console.log(id, "iddd")
+      await deleteNewRelease(id)
+      setTriggerRefetch(true)
+    } catch (err) {
+      console.error("FETCH ERROR:", err);
+    } finally {
+      console.log("delete success")
+    }
+  }
+
+
 
   useEffect(() => {
     if (triggerRefetch) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setList(defaultList)
+      fetchList()
     }
     setTriggerRefetch(false)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggerRefetch])
 
   return (
@@ -51,9 +67,9 @@ export default function AdminPage() {
                 <div key={i} className="relative border-[0.53px] border-neutral-200 text-left rounded-md overflow-clip">
                   <div className="bg-white absolute right-2 top-2 flex items-center p-2 gap-3 rounded-sm *:cursor-pointer *:opacity-70 *:hover:opacity-100">
                     <Icon icon="pencil" color="black" size={14} onClick={() => setDataToEdit(each)} />
-                    <Icon icon="trash" color="red" size={14} onClick={() => handleDelete(each?.id)} />
+                    <Icon icon="trash" color="red" size={14} onClick={() => handleDelete(`${each?.id}`)} />
                   </div>
-                  <img className="h-40 bg-neutral-200 w-full" src={each?.thumbnail} />
+                  <img className="h-40 bg-neutral-200 w-full object-cover" src={each?.thumbnail} />
                   <div className="p-4">
                     <h5 className="text-[16px] font-bold">{each?.title}</h5>
                     <p className="text-[12px] text-neutral-500 line-clamp-2 lg:line-clamp-3">{each?.description}</p>

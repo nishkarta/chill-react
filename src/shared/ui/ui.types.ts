@@ -38,7 +38,7 @@ interface ButtonProps {
 }
 
 interface CarouselItem {
-  id: string,
+  id?: string,
   title: string,
   thumbnail: string,
   description?:string;

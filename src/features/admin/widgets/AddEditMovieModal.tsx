@@ -1,3 +1,6 @@
+import { makeRandomString } from "@shared/helpers/makeRandomString";
+import { omitKeys } from "@shared/helpers/omitKeys";
+import { createNewRelease, updateNewRelease, uploadThumbnail } from "@shared/services/newRelease.service";
 import Button from "@shared/ui/Button";
 import FileDropInput from "@shared/ui/FileDropInput";
 import { Input } from "@shared/ui/Input";
@@ -23,7 +26,7 @@ export default function AddEditMovieModal({
 
   const defaultForm: CarouselItem = useMemo(() => {
     return {
-      id: defaultData?.id || crypto.randomUUID(),
+      id: defaultData?.id || makeRandomString(5),
       title: defaultData?.title || "",
       isNewEpisode: defaultData?.isNewEpisode ?? true,
       description: defaultData?.description || "",
@@ -42,33 +45,43 @@ export default function AddEditMovieModal({
     }));
   };
 
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const existingList: CarouselItem[] = JSON.parse(
-      localStorage.getItem("newReleaseList") ?? "[]"
-    );
+    // const existingList: CarouselItem[] = JSON.parse(
+    //   localStorage.getItem("newReleaseList") ?? "[]"
+    // );
 
+    let thumbnailUrl = "";
+
+    if (form?.thumbnailFile) {
+      thumbnailUrl = await uploadThumbnail(form?.thumbnailFile);
+    }
+
+    console.log(thumbnailUrl, "fdfa")
     const payload: CarouselItem = {
-      ...form,
-      thumbnailFile: undefined
+      ...omitKeys(form, ["thumbnailFile", "id"]),
+      thumbnail: thumbnailUrl || ""
     };
 
     if (!isEdit) {
-      const newList = [payload, ...existingList];
-      localStorage.setItem("newReleaseList", JSON.stringify(newList));
+      // const newList = [payload, ...existingList];
+      // localStorage.setItem("newReleaseList", JSON.stringify(newList));
+      console.log(("enter create"))
+      await createNewRelease(payload)
     } else {
-      const newList = existingList.map((obj) => {
-        if (obj.id === defaultData?.id) {
-          return {
-            ...obj,
-            ...payload
-          };
-        }
-        return obj;
-      });
+      // const newList = existingList.map((obj) => {
+      //   if (obj.id === defaultData?.id) {
+      //     return {
+      //       ...obj,
+      //       ...payload
+      //     };
+      //   }
+      //   return obj;
+      // });
 
-      localStorage.setItem("newReleaseList", JSON.stringify(newList));
+      // localStorage.setItem("newReleaseList", JSON.stringify(newList));
+      await updateNewRelease(String(defaultForm?.id), payload)
     }
 
     setTriggerRefetch(true);
@@ -136,7 +149,7 @@ export default function AddEditMovieModal({
             <div className="flex items-center gap-2">
               <img src={form.thumbnail} className="h-16 w-16 object-cover" />
               <span className="text-[10px]">
-                {form.thumbnailFile?.name || "Current thumbnail"}
+                {form?.thumbnailFile?.name || "Current thumbnail"}
               </span>
             </div>
           )}
