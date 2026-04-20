@@ -1,10 +1,28 @@
+import { continueWatchingList, topRatedList, trendingList } from "@features/home/home.dummies";
 import Footer from "@shared/layout/Footer";
 import Header from "@shared/layout/Header";
-import HeroSection from "./sections/HeroSection";
+import { getNewReleaseList } from "@shared/services/newRelease.service";
 import Carousel from "@shared/ui/Carousel";
-import { continueWatchingList, newReleaseList, topRatedList, trendingList } from "@features/home/home.dummies";
+import type { CarouselItem } from "@shared/ui/ui.types";
+import { useEffect, useState } from "react";
+import HeroSection from "./sections/HeroSection";
 
 export default function HomePage() {
+  const [list, setList] = useState<CarouselItem[]>([])
+
+
+
+  useEffect(() => {
+    const fetchList = async () => {
+      try {
+        const data = await getNewReleaseList();
+        setList(data);
+      } catch (err) {
+        console.error("FETCH ERROR:", err);
+      }
+    };
+    fetchList()
+  }, [])
 
   return (
     <div className="home-page bg-header">
@@ -29,7 +47,7 @@ export default function HomePage() {
         />
         <Carousel
           title="Rilis Baru"
-          list={newReleaseList}
+          list={list}
           className="mb-5 lg:mb-0 lg:py-10"
         />
       </main>

@@ -150,66 +150,69 @@ export default function Carousel({ title, list, thumbnailType, className }: Caro
         </h3>
       )}
 
-      <div className="relative">
-        {
-          width > 1024
-          &&
-          <div
-            className="pointer-events-none absolute h-full left-14 top-1/2 -translate-y-1/2 z-20 flex items-center"
-            onMouseEnter={() => {
-              disableHoverRef.current = true;
-              setHoveredIndex(null);
-              setAnchorRect(null);
-            }}
-            onMouseLeave={() => {
-              disableHoverRef.current = false;
-            }}
-          >
-            <button
-              onClick={() => scroll("left")}
-              className="pointer-events-auto w-10 h-10 flex items-center justify-center text-white rounded-full bg-body border border-outline"
-            >
-              <Icon icon="arrow-left" size={24} />
-            </button>
-          </div>
-        }
+      {
+        list?.length
+          ?
+          <div className="relative">
+            {
+              width > 1024
+              &&
+              <div
+                className="pointer-events-none absolute h-full left-14 top-1/2 -translate-y-1/2 z-20 flex items-center"
+                onMouseEnter={() => {
+                  disableHoverRef.current = true;
+                  setHoveredIndex(null);
+                  setAnchorRect(null);
+                }}
+                onMouseLeave={() => {
+                  disableHoverRef.current = false;
+                }}
+              >
+                <button
+                  onClick={() => scroll("left")}
+                  className="pointer-events-auto w-10 h-10 flex items-center justify-center text-white rounded-full bg-body border border-outline"
+                >
+                  <Icon icon="arrow-left" size={24} />
+                </button>
+              </div>
+            }
 
 
-        <ul
-          ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth hide-scrollbar"
-        >
-
-          {list?.map((each, i) => (
-            <li
-              key={i}
-              data-hover-idx={i}
-              className={cx(
-                thumbnailType === "horizontal"
-                  ?
-                  "w-[309px] h-[151px] md:w-34 md:h-51 lg:w-[302px] lg:h-[162px] "
-                  : "w-23.75 h-36.25 md:w-34 md:h-51 lg:w-58.5 lg:h-91.25",
-                "relative group shrink-0  bg-cover bg-center  rounded-sm lg:rounded-md  "
-              )}
-              style={{ backgroundImage: `url(${each?.thumbnail})` }}
-              onMouseEnter={(e) => {
-                if (disableHoverRef.current) return;
-
-                clearCloseTimer();
-                isOverItemRef.current = true;
-
-                const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-                scheduleOpen(i, rect); // your delayed open
-              }}
-              onMouseLeave={() => {
-                isOverItemRef.current = false;
-                scheduleClose();
-              }}
+            <ul
+              ref={scrollRef}
+              className="flex gap-4 overflow-x-auto scroll-smooth hide-scrollbar"
             >
 
+              {list?.map((each, i) => (
+                <li
+                  key={i}
+                  data-hover-idx={i}
+                  className={cx(
+                    thumbnailType === "horizontal"
+                      ?
+                      "w-[309px] h-[151px] md:w-34 md:h-51 lg:w-[302px] lg:h-[162px] "
+                      : "w-23.75 h-36.25 md:w-34 md:h-51 lg:w-58.5 lg:h-91.25",
+                    "relative group shrink-0  bg-cover bg-center  rounded-sm lg:rounded-md  "
+                  )}
+                  style={{ backgroundImage: `url(${each?.thumbnail})` }}
+                  onMouseEnter={(e) => {
+                    if (disableHoverRef.current) return;
 
-              {each?.isNewEpisode && (
-                <span className="
+                    clearCloseTimer();
+                    isOverItemRef.current = true;
+
+                    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+                    scheduleOpen(i, rect); // your delayed open
+                  }}
+                  onMouseLeave={() => {
+                    isOverItemRef.current = false;
+                    scheduleClose();
+                  }}
+                >
+
+
+                  {each?.isNewEpisode && (
+                    <span className="
                 absolute top-2 left-2
                 text-white text-[5.7px] font-bold
                 px-2.5 py-1
@@ -219,11 +222,11 @@ export default function Carousel({ title, list, thumbnailType, className }: Caro
                 lg:top-4
                 lg:left-4
               ">
-                  Episode Baru
-                </span>
-              )}
-              {each?.isTop10 && (
-                <div className="
+                      Episode Baru
+                    </span>
+                  )}
+                  {each?.isTop10 && (
+                    <div className="
                 p-[1.91px]
                 absolute top-0 right-2
                 flex flex-col
@@ -234,47 +237,50 @@ export default function Carousel({ title, list, thumbnailType, className }: Caro
                 lg:text-[14px]
                 lg:right-4
               ">
-                  <span>Top</span>
-                  <span>10</span>
-                </div>
-              )}
-              {
-                each?.showTitle
-                &&
-                <div className="absolute left-0 bottom-0 p-4 pb-2 w-full flex gap-2 text-white ">
-                  <h5 className="grow text-left text-[14px] font-bold lg:text-[18px]">{each?.title}</h5>
-                  <div className="flex gap-1 items-center">
-                    <Icon icon="star" className="w-3 lg:w-4" />
-                    <span className="text-12px lg:text-14px">{each?.rating}/5</span>
-                  </div>
-                </div>
-              }
-            </li>
-          ))}
-        </ul>
-        {
-          width > 1024
-          &&
-          <div
-            className="pointer-events-none absolute h-full right-14 top-1/2 -translate-y-1/2 z-20 flex items-center"
-            onMouseEnter={() => {
-              disableHoverRef.current = true;
-              setHoveredIndex(null);
-              setAnchorRect(null);
-            }}
-            onMouseLeave={() => {
-              disableHoverRef.current = false;
-            }}
-          >
-            <button
-              onClick={() => scroll("right")}
-              className="pointer-events-auto w-10 h-10 flex items-center justify-center text-white rounded-full  bg-body border border-outline"
-            >
-              <Icon icon="arrow-right" size={24} />
-            </button>
+                      <span>Top</span>
+                      <span>10</span>
+                    </div>
+                  )}
+                  {
+                    each?.showTitle
+                    &&
+                    <div className="absolute left-0 bottom-0 p-4 pb-2 w-full flex gap-2 text-white ">
+                      <h5 className="grow text-left text-[14px] font-bold lg:text-[18px]">{each?.title}</h5>
+                      <div className="flex gap-1 items-center">
+                        <Icon icon="star" className="w-3 lg:w-4" />
+                        <span className="text-12px lg:text-14px">{each?.rating}/5</span>
+                      </div>
+                    </div>
+                  }
+                </li>
+              ))}
+            </ul>
+            {
+              width > 1024
+              &&
+              <div
+                className="pointer-events-none absolute h-full right-14 top-1/2 -translate-y-1/2 z-20 flex items-center"
+                onMouseEnter={() => {
+                  disableHoverRef.current = true;
+                  setHoveredIndex(null);
+                  setAnchorRect(null);
+                }}
+                onMouseLeave={() => {
+                  disableHoverRef.current = false;
+                }}
+              >
+                <button
+                  onClick={() => scroll("right")}
+                  className="pointer-events-auto w-10 h-10 flex items-center justify-center text-white rounded-full  bg-body border border-outline"
+                >
+                  <Icon icon="arrow-right" size={24} />
+                </button>
+              </div>
+            }
           </div>
-        }
-      </div>
+          :
+          <div className="grid place-items-center h-[200px] text-white">Belum ada data</div>
+      }
       <HoverCardPortal
         open={hoveredIndex != null}
         anchorRect={anchorRect}

@@ -28,7 +28,7 @@ export default function Header() {
       <nav className="flex gap-2 items-center">
         <ul className="nav-list grow flex items-center gap-3 py-3 md:py-0 md:gap-10 lg:gap-20">
           <li className="nav-item logo">
-            <a href="">
+            <a href="/home">
               <img className="h-5 md:h-7 lg:h-9" src={width > 768 ? images.LOGO_TEXT : images.LOGO} alt="" />
             </a>
           </li>

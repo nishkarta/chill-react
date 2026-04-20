@@ -48,10 +48,6 @@ export default function AddEditMovieModal({
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // const existingList: CarouselItem[] = JSON.parse(
-    //   localStorage.getItem("newReleaseList") ?? "[]"
-    // );
-
     let thumbnailUrl = "";
 
     if (form?.thumbnailFile) {
@@ -59,28 +55,17 @@ export default function AddEditMovieModal({
     }
 
     console.log(thumbnailUrl, "fdfa")
-    const payload: CarouselItem = {
+
+    const payload = {
       ...omitKeys(form, ["thumbnailFile", "id"]),
-      thumbnail: thumbnailUrl || ""
-    };
+      thumbnail: thumbnailUrl || form?.thumbnail || ""
+    } as Omit<CarouselItem, "id" | "thumbnailFile">;
 
     if (!isEdit) {
-      // const newList = [payload, ...existingList];
-      // localStorage.setItem("newReleaseList", JSON.stringify(newList));
+
       console.log(("enter create"))
       await createNewRelease(payload)
     } else {
-      // const newList = existingList.map((obj) => {
-      //   if (obj.id === defaultData?.id) {
-      //     return {
-      //       ...obj,
-      //       ...payload
-      //     };
-      //   }
-      //   return obj;
-      // });
-
-      // localStorage.setItem("newReleaseList", JSON.stringify(newList));
       await updateNewRelease(String(defaultForm?.id), payload)
     }
 
