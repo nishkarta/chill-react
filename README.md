@@ -1,7 +1,3 @@
 Static Website Link : https://chill-nariska.netlify.app/
 
-ENV:
-
-VITE_FIREBASE_API_KEY="AIzaSyBot9nnQqk53DAFMhewi_g_99Kfc0geHnU"
-
-VITE_FIREBASE_AUTH_DOMAIN="chill-nariska.firebaseapp.com"
+ENV ada di pdf
