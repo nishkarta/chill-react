@@ -1,6 +1,7 @@
+import { fetchMovies, removeMovie } from "@features/admin/adminThunk";
 import AddEditMovieModal from "@features/admin/widgets/AddEditMovieModal";
+import { useAppDispatch, useAppSelector } from "@shared/hooks/redux";
 import Header from "@shared/layout/Header";
-import { deleteNewRelease, getNewReleaseList } from "@shared/services/newRelease.service";
 import Button from "@shared/ui/Button";
 import Icon from "@shared/ui/Icon";
 import { type CarouselItem } from "@shared/ui/ui.types";
@@ -8,45 +9,23 @@ import { cx } from "@shared/utils/cx";
 import { useEffect, useState } from "react";
 
 export default function AdminPage() {
+  const dispatch = useAppDispatch()
+  const { list, loading } = useAppSelector(
+    (state) => state.admin
+  )
   const [showAdd, setShowAdd] = useState(false)
-  const [list, setList] = useState<CarouselItem[]>([])
-  const [triggerRefetch, setTriggerRefetch] = useState(false)
   const [dataToEdit, setDataToEdit] = useState<CarouselItem>()
 
-  const fetchList = async () => {
-    try {
-      const data = await getNewReleaseList();
-      setList(data);
-    } catch (err) {
-      console.error("FETCH ERROR:", err);
-    }
-  };
 
   useEffect(() => {
-    fetchList()
-  }, [])
+    dispatch(fetchMovies())
+  }, [dispatch])
 
   const handleDelete = async (id: string) => {
-    try {
-      console.log(id, "iddd")
-      await deleteNewRelease(id)
-      setTriggerRefetch(true)
-    } catch (err) {
-      console.error("FETCH ERROR:", err);
-    } finally {
-      console.log("delete success")
-    }
+    dispatch(removeMovie(id))
   }
 
-
-
-  useEffect(() => {
-    if (triggerRefetch) {
-      fetchList()
-    }
-    setTriggerRefetch(false)
-  }, [triggerRefetch])
-
+  console.log(loading, "loading")
   return (
     <section className="bg-header h-screen flex flex-col">
       <Header />
@@ -87,7 +66,6 @@ export default function AdminPage() {
           setShowAdd(false)
           setDataToEdit(undefined)
         }}
-        setTriggerRefetch={setTriggerRefetch}
         defaultData={dataToEdit}
       />
     </section>

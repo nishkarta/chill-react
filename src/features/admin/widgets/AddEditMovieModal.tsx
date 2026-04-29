@@ -1,6 +1,8 @@
+import { addMovie, updateMovie } from "@features/admin/adminThunk";
 import { makeRandomString } from "@shared/helpers/makeRandomString";
 import { omitKeys } from "@shared/helpers/omitKeys";
-import { createNewRelease, updateNewRelease, uploadThumbnail } from "@shared/services/newRelease.service";
+import { useAppDispatch } from "@shared/hooks/redux";
+import { uploadThumbnail } from "@shared/services/newRelease.service";
 import Button from "@shared/ui/Button";
 import FileDropInput from "@shared/ui/FileDropInput";
 import { Input } from "@shared/ui/Input";
@@ -13,16 +15,16 @@ interface IAddEditModal {
   show: boolean;
   onClose: () => void;
   defaultData?: CarouselItem;
-  setTriggerRefetch: (e: boolean) => void;
 }
 
 export default function AddEditMovieModal({
   show,
   onClose,
   defaultData,
-  setTriggerRefetch
+
 }: IAddEditModal) {
   const isEdit = !!defaultData;
+  const dispatch = useAppDispatch()
 
   const defaultForm: CarouselItem = useMemo(() => {
     return {
@@ -63,13 +65,13 @@ export default function AddEditMovieModal({
 
     if (!isEdit) {
 
-      console.log(("enter create"))
-      await createNewRelease(payload)
+      dispatch(addMovie(payload))
     } else {
-      await updateNewRelease(String(defaultForm?.id), payload)
+      dispatch(updateMovie({
+        id: String(defaultForm?.id), payload
+      }))
     }
 
-    setTriggerRefetch(true);
     onClose();
   };
 

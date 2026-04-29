@@ -54,7 +54,8 @@ interface CarouselProps {
   title?: string,
   thumbnailType?: string,
   list: CarouselItem[],
-  className?: string
+  className?: string,
+  isLoading?:boolean
 }
 
 export type { AuthCardProps, ButtonProps, InputProps, CarouselItem, CarouselProps, TextAreaProps };

@@ -8,7 +8,7 @@ import { cx } from "@shared/utils/cx";
 
 
 
-export default function Carousel({ title, list, thumbnailType, className }: CarouselProps) {
+export default function Carousel({ title, list, thumbnailType, className , isLoading}: CarouselProps) {
   const scrollRef = useRef<HTMLUListElement | null>(null);
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -279,7 +279,7 @@ export default function Carousel({ title, list, thumbnailType, className }: Caro
             }
           </div>
           :
-          <div className="grid place-items-center h-[200px] text-white">Belum ada data</div>
+          <div className="grid place-items-center h-[200px] text-white">{isLoading ? "Sedang memuat data": "Belum ada data"}</div>
       }
       <HoverCardPortal
         open={hoveredIndex != null}
