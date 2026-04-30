@@ -25,7 +25,6 @@ export default function AdminPage() {
     dispatch(removeMovie(id))
   }
 
-  console.log(loading, "loading")
   return (
     <section className="bg-header h-screen flex flex-col">
       <Header />

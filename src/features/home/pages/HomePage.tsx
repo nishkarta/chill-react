@@ -13,9 +13,6 @@ export default function HomePage() {
     (state) => state.home
   )
 
-  console.log(loading)
-
-
   useEffect(() => {
     dispatch(fetchMovies())
   }, [dispatch])
