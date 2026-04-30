@@ -151,7 +151,7 @@ export default function Carousel({ title, list, thumbnailType, className , isLoa
       )}
 
       {
-        list?.length
+       ( list?.length && !isLoading)
           ?
           <div className="relative">
             {
@@ -194,7 +194,7 @@ export default function Carousel({ title, list, thumbnailType, className , isLoa
                       : "w-23.75 h-36.25 md:w-34 md:h-51 lg:w-58.5 lg:h-91.25",
                     "relative group shrink-0  bg-cover bg-center  rounded-sm lg:rounded-md  "
                   )}
-                  style={{ backgroundImage: `url(${each?.thumbnail})` }}
+                  style={{backgroundColor: "gray",backgroundImage: `url(${each?.thumbnail})` }}
                   onMouseEnter={(e) => {
                     if (disableHoverRef.current) return;
 
@@ -279,7 +279,7 @@ export default function Carousel({ title, list, thumbnailType, className , isLoa
             }
           </div>
           :
-          <div className="grid place-items-center h-[200px] text-white">{isLoading ? "Sedang memuat data": "Belum ada data"}</div>
+          <div className="grid place-items-center h-[200px] text-white">{isLoading ? "Sedang memuat data...": "Belum ada data"}</div>
       }
       <HoverCardPortal
         open={hoveredIndex != null}

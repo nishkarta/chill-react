@@ -40,7 +40,7 @@ export default function AdminPage() {
           !!list?.length && "grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"
         )}>
           {
-            list?.length
+            list?.length && !loading
               ?
               list?.map((each, i) => (
                 <div key={i} className="relative border-[0.53px] border-neutral-200 text-left rounded-md overflow-clip">
@@ -56,7 +56,7 @@ export default function AdminPage() {
                 </div>
               ))
               :
-              <div className="grid place-items-center h-125">Belum ada data</div>
+              <div className="grid place-items-center h-125">{loading ?"Sedang memuat data...": "Belum ada data"}</div>
           }
         </div>
       </main>
