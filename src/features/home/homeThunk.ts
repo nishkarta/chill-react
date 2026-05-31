@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  getNewReleaseList
+  getNewReleaseList,
+  type GetAllSeriesProps
 } from "@shared/services/newRelease.service";
 
 export const fetchMovies = createAsyncThunk(
   "home/fetchMovies",
-  async () => {
-    return await getNewReleaseList();
+  async (params?:GetAllSeriesProps) => {
+    return await getNewReleaseList(params);
   }
 );

@@ -2,8 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchMovies } from "./adminThunk";
 import type { CarouselItem } from "@shared/ui/ui.types";
 
+
+interface ListItem extends CarouselItem{
+thumbnailUrl?:string
+}
 interface AdminState {
-  list: CarouselItem[];
+  list: ListItem[] ;
   loading: boolean;
 }
 

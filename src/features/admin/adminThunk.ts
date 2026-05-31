@@ -4,13 +4,15 @@ import {
   deleteNewRelease,
   createNewRelease,
   updateNewRelease,
+  type GetAllSeriesProps,
 } from "@shared/services/newRelease.service";
 import type { CarouselItem } from "@shared/ui/ui.types";
+import axios from "axios";
 
 export const fetchMovies = createAsyncThunk(
   "admin/fetchMovies",
-  async () => {
-    return await getNewReleaseList();
+  async (params?: GetAllSeriesProps) => {
+    return await getNewReleaseList(params);
   }
 );
 
@@ -24,9 +26,16 @@ export const removeMovie = createAsyncThunk(
 
 export const addMovie = createAsyncThunk(
   "admin/addMovie",
-  async (payload: Omit<CarouselItem, "id" | "thumbnailFile">, { dispatch }) => {
-    await createNewRelease(payload);
-    dispatch(fetchMovies());
+  async (payload: Omit<CarouselItem, "id" | "thumbnail"> & { thumbnailFile: File }, { dispatch, rejectWithValue }) => {
+    try {
+      await createNewRelease(payload);
+      dispatch(fetchMovies());
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return rejectWithValue(err.response?.data);
+      }
+      return rejectWithValue({ error: "System runtime exception" });
+    }
   }
 );
 
@@ -37,9 +46,18 @@ export const updateMovie = createAsyncThunk(
     payload,
   }: {
     id: string;
-    payload: Omit<CarouselItem, "id" | "thumbnailFile">;
-  }, { dispatch }) => {
-    await updateNewRelease(id, payload);
-    dispatch(fetchMovies());
+    payload: Omit<CarouselItem, "id" | "thumbnail">;
+  }, { dispatch, rejectWithValue }) => {
+    try {
+      await updateNewRelease(id, payload);
+      dispatch(fetchMovies())
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        // Pass the backend error structure back down to the unwrap block
+        return rejectWithValue(err.response?.data);
+      }
+      return rejectWithValue({ error: "System runtime exception" });
+    }
+    ;
   }
 );

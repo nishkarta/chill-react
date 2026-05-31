@@ -5,11 +5,14 @@ import { RouterProvider } from 'react-router-dom'
 import { routes } from './router'
 import { Provider } from 'react-redux'
 import { store } from '@app/store/redux/store'
+import { ToastProvider } from '@shared/store/ToastProvider'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={routes} />
-    </Provider>
+    <ToastProvider>
+      <Provider store={store}>
+        <RouterProvider router={routes} />
+      </Provider>
+    </ToastProvider>
   </StrictMode>,
 )

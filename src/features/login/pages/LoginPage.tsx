@@ -4,14 +4,17 @@ import { Input } from "@shared/ui/Input";
 import { useState, type SyntheticEvent } from "react";
 import type { LoginFormProps } from "../login.types";
 import { useNavigate } from "react-router-dom";
+import { login } from "@shared/services/auth.service";
+import { toast } from "@shared/store/ToastProvider";
 
 export default function LoginPage() {
   const [form, setForm] = useState<LoginFormProps>({
     username: "",
     password: ""
   })
-
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const navigate = useNavigate()
+
 
 
   const handleChangeForm = (name: string, value: string) => {
@@ -23,11 +26,25 @@ export default function LoginPage() {
     })
   }
 
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e?.preventDefault()
-    console.log('submit')
-    localStorage.setItem('isLoggedIn', 'true')
-    navigate("/home")
+    try {
+      setIsSubmitting(true)
+      const res = await login(form)
+      localStorage.setItem("accessToken", res.data.token)
+      localStorage.setItem("userDetail", JSON.stringify(res.data.userDetail))
+      localStorage.setItem("isLoggedIn", "true")
+      toast.success("Login berhasil!")
+      navigate("/home")
+      console.log(res, 'ini response login')
+    } catch (err) {
+      const axiosError = err as import("axios").AxiosError<{ error: string }>;
+      const errorMessage = axiosError.response?.data?.error || "Terjadi kesalahan saat login";
+      toast.error(errorMessage);
+    } finally {
+      setIsSubmitting(false)
+    }
+
   }
 
   const handleClickGoogle = (e: SyntheticEvent<HTMLButtonElement>) => {
@@ -44,6 +61,7 @@ export default function LoginPage() {
         caption="Selamat datang kembali!"
         onSubmit={handleSubmit}
         onClickGoogle={handleClickGoogle}
+        isSubmitting={isSubmitting}
       >
         <Input
           label="Username"

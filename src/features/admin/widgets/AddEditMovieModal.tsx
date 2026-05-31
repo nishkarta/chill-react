@@ -2,7 +2,7 @@ import { addMovie, updateMovie } from "@features/admin/adminThunk";
 import { makeRandomString } from "@shared/helpers/makeRandomString";
 import { omitKeys } from "@shared/helpers/omitKeys";
 import { useAppDispatch } from "@shared/hooks/redux";
-import { uploadThumbnail } from "@shared/services/newRelease.service";
+import { toast } from "@shared/store/ToastProvider";
 import Button from "@shared/ui/Button";
 import FileDropInput from "@shared/ui/FileDropInput";
 import { Input } from "@shared/ui/Input";
@@ -31,10 +31,11 @@ export default function AddEditMovieModal({
       id: defaultData?.id || makeRandomString(5),
       title: defaultData?.title || "",
       isNewEpisode: defaultData?.isNewEpisode ?? true,
-      description: defaultData?.description || "",
+      synopsys: defaultData?.synopsys || "",
+      director: defaultData?.director || "",
       thumbnail: defaultData?.thumbnail || "",
       thumbnailFile: undefined,
-      trailer: defaultData?.trailer || ""
+      // trailer: defaultData?.trailer || ""
     };
   }, [defaultData]);
 
@@ -50,29 +51,30 @@ export default function AddEditMovieModal({
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let thumbnailUrl = "";
-
-    if (form?.thumbnailFile) {
-      thumbnailUrl = await uploadThumbnail(form?.thumbnailFile);
-    }
-
-    console.log(thumbnailUrl, "fdfa")
 
     const payload = {
-      ...omitKeys(form, ["thumbnailFile", "id"]),
-      thumbnail: thumbnailUrl || form?.thumbnail || ""
-    } as Omit<CarouselItem, "id" | "thumbnailFile">;
+      ...omitKeys(form, ["id"]),
+    } as Omit<CarouselItem, "id" | "thumbnail"> & { thumbnailFile: File };
 
-    if (!isEdit) {
+    try {
+      if (!isEdit) {
 
-      dispatch(addMovie(payload))
-    } else {
-      dispatch(updateMovie({
-        id: String(defaultForm?.id), payload
-      }))
+        await dispatch(addMovie(payload)).unwrap()
+        toast.success("Film/Series berhasil ditambahkan!");
+      } else {
+        await dispatch(updateMovie({
+          id: String(defaultForm?.id), payload
+        })).unwrap()
+        toast.success("Film/Series berhasil diperbarui!");
+      }
+      onClose();
+    } catch (err) {
+      const serverError = err as { message?: string; error?: string };
+      const errorMessage = serverError.message || serverError.error || "Terjadi kesalahan pada server.";
+      toast.error(errorMessage);
+      console.error("Action error payload:", err);
     }
 
-    onClose();
   };
 
   useEffect(() => {
@@ -102,23 +104,30 @@ export default function AddEditMovieModal({
             required
           />
 
-          <Input
+          {/* <Input
             type="text"
             label="Link Trailer"
             placeholder="Masukkan link trailer"
             value={form.trailer}
             onChange={(e) => handleChangeForm("trailer", e.target.value)}
             required
-          />
+          /> */}
 
           <TextArea
-            label="Deskripsi"
-            placeholder="Masukkan deskripsi"
-            value={form.description}
-            onChange={(e) => handleChangeForm("description", e.target.value)}
+            label="Sinopsis"
+            placeholder="Masukkan sinopsis"
+            value={form.synopsys}
+            onChange={(e) => handleChangeForm("synopsys", e.target.value)}
             required
           />
-
+          <Input
+            type="text"
+            label="Sutradara"
+            placeholder="Masukkan sutradara"
+            value={form.director}
+            onChange={(e) => handleChangeForm("director", e.target.value)}
+            required
+          />
           <FileDropInput
             label="Thumbnail"
             accept="image/*"

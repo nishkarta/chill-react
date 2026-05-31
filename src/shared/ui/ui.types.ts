@@ -6,6 +6,7 @@ interface AuthCardProps {
   caption: string,
   onSubmit: (e: SyntheticEvent<HTMLFormElement>) => void,
   onClickGoogle: (e: SyntheticEvent<HTMLButtonElement>) => void,
+  isSubmitting?:boolean,
 }
 
 type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> & {
@@ -41,13 +42,15 @@ interface CarouselItem {
   id?: string,
   title: string,
   thumbnail: string,
-  description?:string;
+  thumbnailUrl?: string,
+  synopsys?:string;
   thumbnailFile?: File,
   showTitle?: boolean,
   isNewEpisode?: boolean,
   isTop10?: boolean,
   rating?: number | string,
   trailer?: string,
+  director?:string,
 }
 
 interface CarouselProps {

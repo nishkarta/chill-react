@@ -1,10 +1,14 @@
 import { fetchMovies, removeMovie } from "@features/admin/adminThunk";
 import AddEditMovieModal from "@features/admin/widgets/AddEditMovieModal";
 import { useAppDispatch, useAppSelector } from "@shared/hooks/redux";
+import { useDebounce } from "@shared/hooks/useDebounce";
 import Header from "@shared/layout/Header";
+import { toast } from "@shared/store/ToastProvider";
 import Button from "@shared/ui/Button";
 import Icon from "@shared/ui/Icon";
+import { Input } from "@shared/ui/Input";
 import { type CarouselItem } from "@shared/ui/ui.types";
+import { FILE_BASE_URL } from "@shared/utils/config";
 import { cx } from "@shared/utils/cx";
 import { useEffect, useState } from "react";
 
@@ -13,16 +17,22 @@ export default function AdminPage() {
   const { list, loading } = useAppSelector(
     (state) => state.admin
   )
+  const [search, setSearch] =useState("")
+  const debouncedSearch = useDebounce(search, 300)
   const [showAdd, setShowAdd] = useState(false)
   const [dataToEdit, setDataToEdit] = useState<CarouselItem>()
-
 
   useEffect(() => {
     dispatch(fetchMovies())
   }, [dispatch])
 
+  useEffect(()=> {
+    dispatch(fetchMovies({ search: debouncedSearch }));
+  }, [debouncedSearch, dispatch])
+
   const handleDelete = async (id: string) => {
-    dispatch(removeMovie(id))
+    await dispatch(removeMovie(id)).unwrap()
+    toast.success("Film/Series berhasil dihapus!");
   }
 
   return (
@@ -31,6 +41,12 @@ export default function AdminPage() {
       <main className="grow flex flex-col gap-8 text-white py-5 *:w-full *:px-5.5 md:*:px-10 lg:*:px-20">
         <div className="flex items-center gap-4">
           <h3 className="grow text-left text-[20px] md:text-[24px] lg:text-[32px]">List Film/Series Terbaru</h3>
+          <Input
+            containerClassName="w-100!"
+            placeholder="Cari Film/Series"
+            value={search}
+            onChange={(e)=> setSearch(e.target.value)}
+          />
           <Button onClick={() => setShowAdd(true)} variant="outlined" className="h-6! w-6! p-0! rounded-[50%] text-[16px]! border-2! md:text-[20px]! md:w-8! md:h-8! lg:text-[24px]! lg:h-10! lg:w-10!">
             +
           </Button>
@@ -47,15 +63,16 @@ export default function AdminPage() {
                     <Icon icon="pencil" color="black" size={14} onClick={() => setDataToEdit(each)} />
                     <Icon icon="trash" color="red" size={14} onClick={() => handleDelete(`${each?.id}`)} />
                   </div>
-                  <img className="h-40 bg-neutral-200 w-full object-cover" src={each?.thumbnail} />
+                  <img className="h-40 bg-neutral-200 w-full object-cover" src={FILE_BASE_URL + each?.thumbnailUrl} />
                   <div className="p-4">
-                    <h5 className="text-[16px] font-bold">{each?.title}</h5>
-                    <p className="text-[12px] text-neutral-500 line-clamp-2 lg:line-clamp-3">{each?.description}</p>
+                    <h5 className="text-[18px] leading-[100%] mb-1 font-bold">{each?.title}</h5>
+                    <p className="text-[11px] text-neutral-500 line-clamp-2 lg:line-clamp-3 mb-1">Directed By: {each?.director}</p>
+                    <p className="text-[14px] text-neutral-200 line-clamp-2 lg:line-clamp-3">{each?.synopsys}</p>
                   </div>
                 </div>
               ))
               :
-              <div className="grid place-items-center h-125">{loading ?"Sedang memuat data...": "Belum ada data"}</div>
+              <div className="grid place-items-center h-125">{loading ? "Sedang memuat data..." : "Belum ada data"}</div>
           }
         </div>
       </main>

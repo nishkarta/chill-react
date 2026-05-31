@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { CarouselProps } from "./ui.types";
+import type { CarouselItem, CarouselProps } from "./ui.types";
 import Icon from "./Icon";
 import useWindowSize from "@shared/hooks/useWindowSize";
 import { HoverCardPortal } from "./HoverCardPortal";
 import { cn } from "@shared/utils/cn";
 import { cx } from "@shared/utils/cx";
-
-
+import { FILE_BASE_URL } from "@shared/utils/config";
 
 export default function Carousel({ title, list, thumbnailType, className , isLoading}: CarouselProps) {
   const scrollRef = useRef<HTMLUListElement | null>(null);
@@ -15,6 +14,13 @@ export default function Carousel({ title, list, thumbnailType, className , isLoa
   const [anchorRect, setAnchorRect] = useState<DOMRect | null>(null);
 
   const disableHoverRef = useRef(false);
+
+  const mappedList:CarouselItem[]= list?.map(each => {
+    return {
+      ...each,
+      thumbnail: each?.thumbnail ? each?.thumbnail : FILE_BASE_URL + each?.thumbnailUrl
+    }
+  })
 
 
   const { width } = useWindowSize()
@@ -151,7 +157,7 @@ export default function Carousel({ title, list, thumbnailType, className , isLoa
       )}
 
       {
-       ( list?.length && !isLoading)
+       ( mappedList?.length && !isLoading)
           ?
           <div className="relative">
             {
@@ -183,7 +189,7 @@ export default function Carousel({ title, list, thumbnailType, className , isLoa
               className="flex gap-4 overflow-x-auto scroll-smooth hide-scrollbar"
             >
 
-              {list?.map((each, i) => (
+              {mappedList?.map((each, i) => (
                 <li
                   key={i}
                   data-hover-idx={i}
